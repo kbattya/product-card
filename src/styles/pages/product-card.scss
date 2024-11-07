@@ -1,0 +1,108 @@
+.product-page {
+	padding: 10vw;
+}
+
+.card {
+	display: flex;		
+	flex-direction: row;
+	padding: 24px 0;
+
+	div {
+		flex: 1;
+	}
+
+	&__info {
+		width: 552px;	
+	}
+
+	&__title {
+		font-size: 32px;
+		line-height: 40px;
+		font-weight: 700;
+		margin-bottom: 16px;
+	}
+
+	&__price {
+		font-size: 24px;
+		line-height: 32px;
+		font-weight: 700;
+		margin-bottom: 16px;
+	}
+
+	&__colour-label {
+		font-size: 16px;
+		line-height: 24px;
+		font-weight: 700;
+		margin-bottom: 16px;
+	}
+	&__selected-colour {
+		padding-left: 8px;
+		font-weight: 400;
+	}
+
+	&__colour-images {
+		display: flex;
+		flex-direction: row;
+		gap: 12px;
+	}
+	&__colour-item {
+		cursor: pointer;
+		max-width: 100px;
+		height: 70px;
+		padding: 12px;
+
+		background-color: #C5C7CA40;
+		border: 1px solid #F0F6FA;
+		border-radius: 6px;
+
+		&:hover {
+			.card__colour-image {
+				transform: scale(1.3);
+			}
+		}
+	}
+	&__colour-item--selected {
+		background-color: #F0F6FA;
+		border: 1.5px solid #34739D;
+	}
+	&__colour-item--disabled {
+		opacity: 50%;
+		cursor: default;
+		position: relative;
+	}
+	&__colour-item--disabled::after {
+		content: 'Sold Out'; 
+		position: absolute;
+		top: 50px;
+		left: 80%;
+		transform: translateX(-50%);
+		background-color: #000;
+		color: white;
+		padding: 4px 8px;
+		border-radius: 5px;
+		font-size: 12px;
+		opacity: 0;
+		visibility: hidden;
+		// transition: opacity 0.1s ease;
+		z-index: 10;
+		width: 65px;
+	}
+	&__colour-item--disabled:hover::after {
+		opacity: 1;
+		visibility: visible;
+	}
+	&__colour-item--disabled:hover {
+		.card__colour-image  {
+			transform: none;
+		}
+	}
+
+	&__colour-image {
+		width: 77px;
+		height: 46px;
+		transition: transform 0.3s ease;
+	}
+
+	
+	
+}

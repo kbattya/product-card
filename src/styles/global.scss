@@ -1,0 +1,33 @@
+@use 'modules/forwarded';
+@use 'pages/product-card';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --text-animation-speed: 1.5s;
+	font: optional;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-family: 'Inter', sans-serif;
+}
+
+.breadcrumps {
+	display: flex;
+	gap: 10px;
+	color: #93989C;
+
+	.link {
+		border-bottom: 1px solid #93989C;
+		font-size: 14px;
+		line-height: 20px;
+
+		&--active {
+			text-decoration: none;
+			color: #34739D;
+			font-weight: 600;
+			border: none;
+		}
+	}
+
+}
