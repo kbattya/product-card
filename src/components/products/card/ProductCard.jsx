@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { CartIcon, CompareIcon, LikeIcon } from "../../../assets/icons";
 
 const product = {
 	title: "ASICS GEL-KAYANO 14",
@@ -164,7 +165,7 @@ const product = {
 				{ "EU": "47" },
 				{ "cm": "30" },
 			],
-			available: true,
+			available: false,
 		},
 		{
 			id: "14",
@@ -174,7 +175,7 @@ const product = {
 				{ "EU": "47.5" },
 				{ "cm": "30.5" },
 			],
-			available: true,
+			available: false,
 		},
 		{
 			id: "15",
@@ -186,6 +187,39 @@ const product = {
 			],
 			available: true,
 		},
+	],
+	images: [
+		{
+			id: "1",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/9090694b-f55a-4f14-ab22-a86623e51154/644x326.png"
+		},
+		{
+			id: "2",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/8655e95c-eee4-4a86-ab81-de05f26ebfc0/644x326.png"
+		},
+		{
+			id: "3",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/8655e95c-eee4-4a86-ab81-de05f26ebfc0/644x326.png"
+		},
+		{
+			id: "4",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/8655e95c-eee4-4a86-ab81-de05f26ebfc0/644x326.png"
+		},
+		{
+			id: "5",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/8655e95c-eee4-4a86-ab81-de05f26ebfc0/644x326.png"
+		},
+		{
+			id: "6",
+			alt: "atl text",
+			url: "http://cdn.mcauto-images-production.sendgrid.net/76382aa1ad255297/8655e95c-eee4-4a86-ab81-de05f26ebfc0/644x326.png"
+		},
+
 	]
 }
 
@@ -193,7 +227,8 @@ export default function ProductCard({}) {
 	const [selectedColor, setSelectedColour] = useState(product.colours[1])
 	// eslint-disable-next-line 
 	const [selectedSize, setSelectedSize] = useState(product.sizes[1])
-	const [selectedSizeConversion, setSelectedSizeConversion] = useState("UK")
+	const [selectedSizeConversion, setSelectedSizeConversion] = useState({ UK: "UK" })
+	const [selectedPreviewImage, setSelectedPreviewImage] = useState(product.images[0]) // TODO add colours options 
 
 	const conversionMapper = [
 		{ UK: "UK" },
@@ -202,9 +237,18 @@ export default function ProductCard({}) {
 		{ cm: "Foot Length (cm)" },
 	];
 
+	const convertSize = (size) => {
+		return size.title.find(size => size[Object.keys(selectedSizeConversion)[0]] !== undefined)[Object.keys(selectedSizeConversion)[0]]
+	}
+
+	useEffect(() => {
+		console.log({selectedSizeConversion})
+		console.log({selectedSize})
+	}, [selectedSizeConversion, selectedSize])
+
 
 	return (
-		<main class="product-page">
+		<main className="product-page">
 			<nav className='breadcrumps'>
 				<a href="/" className="link">Home</a> 
 				<span className="separator">/</span>
@@ -213,9 +257,23 @@ export default function ProductCard({}) {
 				<a href="/" className="link link--active">Unisex SportStyle Shoes</a>
 			</nav>
 
-			<section class="card">
-				<div>
-					image
+			<section className="card">
+				<div className="card__preview">
+					<div className="card__main-photo"></div>
+					
+					<div className="card__gallery">
+						{product.images.map((image) => (
+							<div
+								className={`
+									card__gallery-item
+
+								`}
+								key={image.url}
+						>
+								<img src={image.url} alt={image.alt} />
+							</div>
+						))}
+					</div>
 				</div>
 
 				<div className="card__info">
@@ -231,10 +289,10 @@ export default function ProductCard({}) {
 						<div className="card__colour-images">
 							{product.colours.map((colour) => {
 								return (
-									<div 
+									<div  // TODO rewrite on button
 										key={colour.id} 
 										className={`
-											card__colour-item 
+											plain-button card__colour-item
 											${!colour.available ? "card__colour-item--disabled" : ""}
 											${selectedColor.id === colour.id ? "card__colour-item--selected" : ""}
 										`}
@@ -254,10 +312,11 @@ export default function ProductCard({}) {
 					<div className="card__size-configurator">
 						<p className="card__size-label">
 							Size: 
-							{/* <span className="card__size-selected-size">{selectedSizeConversion}</span> */}
+							<span className="card__selected-size">{convertSize(selectedSize)}</span>
+							<span className="card__selected-conversion">{Object.keys(selectedSizeConversion)[0]}</span>
 						</p>
 
-						<div className="card__size-conversion-selector">
+						<div className="card__size-conversion-picker">
 							{conversionMapper.map((conversion) => {
 								const key = Object.keys(conversion)[0];
 								const label = conversion[key];
@@ -265,8 +324,11 @@ export default function ProductCard({}) {
 								return (
 									<button
 										key={key}
-										className="size-button"
-										onClick={() => setSelectedSizeConversion(key)}
+										className={`
+											plain-button
+											${Object.keys(selectedSizeConversion)[0] === key ? "plain-button--selected" : ""}
+										`}
+										onClick={() => setSelectedSizeConversion(conversion)}
 									>
 										{label}
 									</button>
@@ -274,6 +336,36 @@ export default function ProductCard({}) {
 							})}
 						</div>
 
+						<div className="card__size--picker">
+							{product.sizes.map((size) => {
+								const foundSize = convertSize(size);
+
+								return (
+									<button
+										key={size.id}
+										className={`
+											outlined-button
+											${selectedSize?.id === size.id ? "outlined-button--selected" : "" }
+											${!size.available ? "outlined-button--disabled" : "" }
+											
+										`}
+										onClick={() => setSelectedSize(size)}
+									>
+										{foundSize}
+									</button>
+								)
+							})}
+						</div>
+
+						<div className="card__size--info">
+							<a href="/" className="link-secondary">Size guide</a>
+						</div>
+					</div>
+
+					<div className="card__actions">
+						<button className="primary-button"><CartIcon />Add to cart</button>
+						<button className="outlined-button"><LikeIcon /></button>
+						<button className="plain-button"><CompareIcon /></button>
 					</div>
 				</div>
 			</section>

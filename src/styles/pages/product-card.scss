@@ -1,3 +1,5 @@
+@use '../modules/forwarded';
+
 .product-page {
 	padding: 10vw;
 }
@@ -6,13 +8,24 @@
 	display: flex;		
 	flex-direction: row;
 	padding: 24px 0;
+	
 
-	div {
+	&__preview {
 		flex: 1;
 	}
 
+	&__gallery {
+		display: flex;
+		flex-direction: row;
+
+		.card__gallery-item {
+			width: 100px;
+			height: 100px;
+		}
+	}
+
 	&__info {
-		width: 552px;	
+		max-width: 550px;
 	}
 
 	&__title {
@@ -29,11 +42,11 @@
 		margin-bottom: 16px;
 	}
 
-	&__colour-label {
+	&__colour-label,
+	&__size-label {
 		font-size: 16px;
 		line-height: 24px;
 		font-weight: 700;
-		margin-bottom: 16px;
 	}
 	&__selected-colour {
 		padding-left: 8px;
@@ -41,6 +54,7 @@
 	}
 
 	&__colour-images {
+		margin-top: 16px;
 		display: flex;
 		flex-direction: row;
 		gap: 12px;
@@ -62,8 +76,7 @@
 		}
 	}
 	&__colour-item--selected {
-		background-color: #F0F6FA;
-		border: 1.5px solid #34739D;
+		@include forwarded.m-selected-button
 	}
 	&__colour-item--disabled {
 		opacity: 50%;
@@ -103,6 +116,72 @@
 		transition: transform 0.3s ease;
 	}
 
+
+	&__size-configurator {
+		margin-top: 24px;
+	}
+
+	&__selected-size,
+	&__selected-conversion {
+		padding-left: 6px;
+		font-weight: 400;
+	}
+
+	&__size-conversion-picker {
+		margin-top: 8px;
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+		font-size: 14px;
+	}
+
+	&__size--picker {
+		margin-top: 10px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(102px, 1fr));
+		gap: 10px; 
+
+		width: 552px;
+		margin-right: -10px;
+	}
 	
+	&__size--info {
+		width: 550px;
+		display: flex;
+		margin-top: 10px;
+
+		.link-secondary {
+			margin-left: auto;	
+			color: #51585F;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: row;
+		gap: 12px;
+		margin-top: 24px;
+
+		.primary-button {
+			width: 100%;
+		}
+
+		.plain-button {
+			padding: 12px;
+		}
+
+		.outlined-button {
+			width: min-content;
+			height: 100%;
+		}
+
+		.plain-button:hover, .outlined-button:hover {
+			color: #34739D;
+		}
+
+		.outlined-button:hover {
+			border-color: #34739D;
+		}
+	}
 	
 }

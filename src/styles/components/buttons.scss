@@ -1,0 +1,65 @@
+@use '../modules/forwarded';
+
+.plain-button {
+	cursor: pointer;
+}
+.plain-button--selected {
+	color: #34739D;
+	font-weight: 600;
+}
+
+.outlined-button {
+	@include forwarded.m-flex-center;
+	font-size: 16px;
+
+	cursor: pointer;
+	padding: 12px;
+
+	width: 100px;
+	height: 40px;
+
+	border: 1px solid #21262C;
+	border-radius: 6px;
+}
+
+.outlined-button:hover {
+	background-color: #F0F6FA;
+	// transition: all .5s;
+}
+
+.outlined-button:active {
+	border-color: #FFF200;
+	// transition: all .5s;
+}
+
+
+.outlined-button--selected {
+	@include forwarded.m-selected-button;
+	font-weight: 500;
+}
+
+.outlined-button--disabled {
+	border-color: #93989C;
+	background-color: #C5C7CA33;
+	text-decoration: line-through;
+	color: #93989C;
+	opacity: 50%;
+	pointer-events: none;
+}
+
+
+.primary-button {
+	@include forwarded.m-flex-center;
+	cursor: pointer;
+	border-radius: 8px;
+
+	font-weight: 700;
+	background-color: #FFF200;
+	// border: 1.5px solid #FFF200;
+	gap: 10px;
+}
+
+.primary-button:hover {
+	background-color: lighten(#FFF200, 30%);
+	transition: all .2s;
+}
