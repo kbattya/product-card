@@ -1,4 +1,4 @@
-@use '../modules/forwarded';
+@use '../modules/forwarded' as *; 
 
 .product-page {
 	padding: 10vw;
@@ -8,7 +8,6 @@
 	display: flex;		
 	flex-direction: row;
 	padding: 24px 0;
-	
 
 	&__preview {
 		flex: 1;
@@ -68,15 +67,9 @@
 		background-color: #C5C7CA40;
 		border: 1px solid #F0F6FA;
 		border-radius: 6px;
-
-		&:hover {
-			.card__colour-image {
-				transform: scale(1.3);
-			}
-		}
 	}
 	&__colour-item--selected {
-		@include forwarded.m-selected-button
+		@include m-selected-button
 	}
 	&__colour-item--disabled {
 		opacity: 50%;
@@ -96,7 +89,6 @@
 		font-size: 12px;
 		opacity: 0;
 		visibility: hidden;
-		// transition: opacity 0.1s ease;
 		z-index: 10;
 		width: 65px;
 	}
@@ -116,7 +108,6 @@
 		transition: transform 0.3s ease;
 	}
 
-
 	&__size-configurator {
 		margin-top: 24px;
 	}
@@ -133,6 +124,10 @@
 		flex-direction: row;
 		gap: 8px;
 		font-size: 14px;
+
+		.plain-button {
+			padding: 2px;
+		}
 	}
 
 	&__size--picker {
@@ -166,22 +161,27 @@
 			width: 100%;
 		}
 
-		.plain-button {
-			padding: 12px;
-		}
-
 		.outlined-button {
 			width: min-content;
 			height: 100%;
+
+			&:hover {
+				border-color: #34739D;
+				color: #34739D;
+			}
+			&:active {
+				border-color: $v-color-primary;
+				color: #000;
+			}
 		}
 
-		.plain-button:hover, .outlined-button:hover {
-			color: #34739D;
-		}
-
-		.outlined-button:hover {
-			border-color: #34739D;
+		.plain-button {
+			&:hover {
+				color: #34739D;
+			}
+			&:active {
+				border-color: $v-color-primary;
+			}
 		}
 	}
-	
 }

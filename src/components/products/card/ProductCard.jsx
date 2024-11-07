@@ -289,21 +289,21 @@ export default function ProductCard({}) {
 						<div className="card__colour-images">
 							{product.colours.map((colour) => {
 								return (
-									<div  // TODO rewrite on button
+									<button
 										key={colour.id} 
 										className={`
-											plain-button card__colour-item
-											${!colour.available ? "card__colour-item--disabled" : ""}
-											${selectedColor.id === colour.id ? "card__colour-item--selected" : ""}
+											image-button
+											${selectedColor.id === colour.id ? "image-button--selected" : ""}
 										`}
-										onClick={() => colour.available && setSelectedColour(colour)}
+										onClick={() => setSelectedColour(colour)}
+										disabled={!colour.available}
 									>
 										<img 
 											src={colour.image} 
 											alt={colour.title} 
 											className="card__colour-image"
 										/>
-									</div>
+									</button>
 								);
 							})}
 						</div>
@@ -346,9 +346,8 @@ export default function ProductCard({}) {
 										className={`
 											outlined-button
 											${selectedSize?.id === size.id ? "outlined-button--selected" : "" }
-											${!size.available ? "outlined-button--disabled" : "" }
-											
 										`}
+										disabled={!size.available}
 										onClick={() => setSelectedSize(size)}
 									>
 										{foundSize}
