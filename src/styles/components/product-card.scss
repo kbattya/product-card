@@ -1,26 +1,25 @@
 @use '../modules/forwarded' as *; 
 
-.product-page {
-	padding: 10vw;
-}
-
 .card {
-	display: flex;		
-	flex-direction: row;
+	@include m-flex-center;
+	align-items: flex-start;
 	padding: 24px 0;
+	gap: 48px;
 
-	&__preview {
-		flex: 1;
+	&__main-photo {
+		background-color: #F4F8FB80;
+		border: 1px solid #F4F8FB;
+		border-radius: $v-border-radius;
+		padding: $v-padding-medium;
+		@include m-flex-center;
+		width: 692px;
+		height: 692px;
 	}
 
 	&__gallery {
-		display: flex;
-		flex-direction: row;
-
-		.card__gallery-item {
-			width: 100px;
-			height: 100px;
-		}
+		@include m-flex-center;
+		justify-content: space-between;
+		margin-top: 16px;
 	}
 
 	&__info {
@@ -145,9 +144,12 @@
 		display: flex;
 		margin-top: 10px;
 
-		.link-secondary {
+		.plain-button {
 			margin-left: auto;	
 			color: #51585F;
+			&:hover {
+				color: #34739D;
+			}
 		}
 	}
 

@@ -1,6 +1,9 @@
 @use 'modules/forwarded';
-@use 'pages/product-card';
+@use 'pages/product';
 @use 'components/buttons';
+@use 'components/product-card';
+@use 'components/modal.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 :root {

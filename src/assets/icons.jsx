@@ -21,3 +21,12 @@ export const CartIcon = () => {
 		</svg>
 	)
 }
+
+export const CloseIcon = () => {
+	return (
+		<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M7.03833 17.243L12.2813 12L7.03833 17.243ZM17.5243 6.75702L12.2803 12L17.5243 6.75702ZM12.2803 12L7.03833 6.75702L12.2803 12ZM12.2813 12L17.5243 17.243L12.2813 12Z" fill="currentColor"/>
+			<path d="M7.03833 17.243L12.2813 12L17.5243 17.243M17.5243 6.75702L12.2803 12L7.03833 6.75702" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+		</svg>
+	)
+}
