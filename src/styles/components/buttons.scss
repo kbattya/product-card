@@ -2,7 +2,6 @@
 
 .outlined-button {
 	@include m-button-styles(v-color-primary, #000, $border-color: $v-color-border);
-	width: 100px;
 	height: 40px;
 
 	&:hover {
@@ -58,6 +57,12 @@
 		.card__colour-image {
 			@include m-hover-scale(1.3)
 		}
+
+		@media (max-width: 680px) {
+			.card__colour-image {
+				@include m-hover-scale(1.1)
+			}
+		}
 	}
 	
 	&:active {
@@ -101,7 +106,10 @@
 				visibility: visible;
 			}
 		}
-	
+	}
+
+	@media (max-width: 680px) {
+		padding: 4px;
 	}
 }
 

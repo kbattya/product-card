@@ -24,6 +24,7 @@ export default function ProductCard({product, openModal}) {
 			<div className="card__preview">
 				<div className="card__main-photo">
 					<img src={selectedPreviewImage.url} alt={selectedPreviewImage.alt} />
+					<button className="outlined-button favotire-action"><LikeIcon /></button>
 				</div>
 					
 				<div className="card__gallery">
@@ -122,14 +123,12 @@ export default function ProductCard({product, openModal}) {
 						})}
 					</div>
 
-					<div className="card__size--info" >
-						<button onClick={openModal} className="plain-button">Size guide</button>
-					</div>
+					<button onClick={openModal} className="plain-button">Size guide</button>
 				</div>
 
 				<div className="card__actions">
 					<button className="primary-button"><CartIcon />Add to cart</button>
-					<button className="outlined-button"><LikeIcon /></button>
+					<button className="outlined-button favotire-action"><LikeIcon /></button>
 					<button className="plain-button"><CompareIcon /></button>
 				</div>
 			</div>

@@ -6,6 +6,12 @@
 	padding: 24px 0;
 	gap: 48px;
 
+	@media (max-width: 1000px) {
+		flex-direction: column;
+		align-items: center;
+	}
+	
+
 	&__main-photo {
 		background-color: #F4F8FB80;
 		border: 1px solid #F4F8FB;
@@ -14,12 +20,46 @@
 		@include m-flex-center;
 		width: 692px;
 		height: 692px;
+		position: relative;
+
+		.favotire-action {
+			display: none;
+			height: 42px;
+		}
+
+		@media (max-width: 1300px) {
+			max-width: 40dvw;
+			max-height: 60dvh;
+		}
+
+		@media (max-width: 1000px) {
+			max-width: calc(100dvw - 40px);
+
+			.favotire-action  {
+				display: block;
+				position: absolute;
+				top: 20px;
+				right: 20px;
+			}
+		}
+
+		
 	}
 
 	&__gallery {
 		@include m-flex-center;
 		justify-content: space-between;
 		margin-top: 16px;
+
+		@media (max-width: 1300px) {
+			gap: 6px;
+		}
+
+		@media (max-width: 700px) {
+			.image-button:last-child {
+				display: none;
+			}
+		}
 	}
 
 	&__info {
@@ -31,6 +71,12 @@
 		line-height: 40px;
 		font-weight: 700;
 		margin-bottom: 16px;
+
+		@media (max-width: 600px) {
+			font-size: 28px;
+			line-height: 36px;
+			margin-bottom: 6px;
+		}
 	}
 
 	&__price {
@@ -38,6 +84,11 @@
 		line-height: 32px;
 		font-weight: 700;
 		margin-bottom: 16px;
+		
+		@media (max-width: 600px) {
+			font-size: 22px;
+			line-height: 28px;
+		}
 	}
 
 	&__colour-label,
@@ -56,6 +107,11 @@
 		display: flex;
 		flex-direction: row;
 		gap: 12px;
+		justify-content: space-between;
+
+		@media (max-width: 480px) {
+			gap: 2px;
+		}
 	}
 	&__colour-item {
 		cursor: pointer;
@@ -102,13 +158,16 @@
 	}
 
 	&__colour-image {
-		width: 77px;
-		height: 46px;
+		// width: 77px;
+		// height: 46px;
 		transition: transform 0.3s ease;
 	}
 
 	&__size-configurator {
 		margin-top: 24px;
+		display: flex;
+    flex-direction: column;
+		align-items: flex-start;
 	}
 
 	&__selected-size,
@@ -137,19 +196,19 @@
 
 		width: 552px;
 		margin-right: -10px;
+
+		@media (max-width: 600px) {
+			grid-template-columns: repeat(auto-fill, minmax(65.8px, 1fr));
+			width: calc(100dvw - 40px);
+		}	
 	}
 	
-	&__size--info {
-		width: 550px;
-		display: flex;
-		margin-top: 10px;
-
-		.plain-button {
-			margin-left: auto;	
-			color: #51585F;
-			&:hover {
-				color: #34739D;
-			}
+	.plain-button {
+		margin-left: auto;	
+		padding-right: 0;
+		color: #51585F;
+		&:hover {
+			color: #34739D;
 		}
 	}
 
@@ -183,6 +242,19 @@
 			}
 			&:active {
 				border-color: $v-color-primary;
+			}
+		}
+
+		@media (max-width: 1000px) {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100dvw;
+			padding: 20px;
+			background-color: white;
+
+			.favotire-action {
+				display: none;
 			}
 		}
 	}

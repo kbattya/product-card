@@ -2,4 +2,10 @@
 
 .product-page {
 	padding: 74px;
+
+	@media (max-width: 1000px) {
+		padding: 20px;
+		padding-bottom: 80px;
+	}
+
 }
