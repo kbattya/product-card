@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CartIcon, CompareIcon, LikeIcon } from "../../assets/icons";
 
 export default function ProductCard({product, openModal}) {
 	const [selectedColor, setSelectedColour] = useState(product?.colours[1])
 	const [selectedSize, setSelectedSize] = useState(product?.sizes[1])
 	const [selectedSizeConversion, setSelectedSizeConversion] = useState({ UK: "UK" })
-	const [selectedPreviewImage, setSelectedPreviewImage] = useState(product?.images[0]) // TODO add colours options 				
+	const [selectedPreviewImage, setSelectedPreviewImage] = useState(product?.images[0])
+	const [selectedImagesStack, setSelectedImagesStack] = useState(product.images.find(({color_id}) => color_id === product?.colours[1].id)?.images)
 
 	const conversionMapper = [
 		{ UK: "UK" },
@@ -18,6 +19,11 @@ export default function ProductCard({product, openModal}) {
 		return size.title.find(size => size[Object.keys(selectedSizeConversion)[0]] !== undefined)[Object.keys(selectedSizeConversion)[0]]
 	}
 
+	useEffect(() => {
+		setSelectedPreviewImage(product.images.find(({color_id}) => color_id === selectedColor.id)?.images[0])
+		setSelectedImagesStack(product.images.find(({color_id}) => color_id === selectedColor.id)?.images)
+		
+	}, [selectedColor])
 
 	return (
 		<section className="card">
@@ -28,16 +34,16 @@ export default function ProductCard({product, openModal}) {
 				</div>
 					
 				<div className="card__gallery">
-					{product.images.map((image) => (
+					{selectedImagesStack.map((image) => (
 						<button
 							className={`
 								image-button
 								${image.id === selectedPreviewImage.id ? "image-button--selected" : ""}
 							`}
-							key={image.url}
+							key={image.id}
 							onClick={() => setSelectedPreviewImage(image)}
 					>
-							<img src={image.url} alt={image.alt} />
+							<img src={image.url} alt={image.alt} className="card__gallery-image"/>
 						</button>
 					))}
 				</div>

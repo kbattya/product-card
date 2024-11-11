@@ -20,7 +20,7 @@
 
 @mixin selected-button {
   background-color: $color-background;
-	border: 1.5px solid #34739D;
+	border: 1.5px solid $color-hover;
 }
 
 @mixin hover-scale($scale: 1.3) {

@@ -40,7 +40,7 @@
 	@include m-button-styles(transparent, #000);
 
 	&--selected {
-		color: $v-color-hover;
+		color: $v-color-hover!important;
 		font-weight: 600;
 	}
 	&:hover {
@@ -49,21 +49,22 @@
 }
 
 .image-button {
-	@include m-button-styles(#F4F8FB80, #000, $border-color:#F4F8FB);
+	@include m-button-styles($v-color-background-light, #000, $border-color:#F4F8FB);
 	max-width: 100px;
 	height: 70px;
 
 	&:hover {
-		.card__colour-image {
+		.card__colour-image, .card__gallery-image {
 			@include m-hover-scale(1.3)
 		}
 
 		@media (max-width: 680px) {
-			.card__colour-image {
+			.card__colour-image, .card__gallery-image {
 				@include m-hover-scale(1.1)
 			}
 		}
 	}
+
 	
 	&:active {
 		border-color: $v-color-primary;
@@ -71,6 +72,11 @@
 
 	&--selected {
 		@include m-selected-button;
+
+		.card__colour-image,
+		.card__gallery-image {
+			transform: scale(1) !important;
+		}
 	}
 
 	&:disabled {
@@ -98,7 +104,7 @@
 		}
 
 		&:hover {
-			.card__colour-image  {
+			.card__colour-image, .card__gallery-image  {
 				transform: none;
 			}
 			&::after {
