@@ -1,14 +1,28 @@
 import ModalProvider from './components/modals/ModalProvider';
 import ProductCard from './components/product/ProductCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './main.scss';
 import ShoesGuideSizeModal from './components/modals/ShoesGuideSizeModal';
-import product from "./data.json"
+import productData from "./data.json"
 
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
-	const [modalType, setModalType] = useState("")
+	const [modalType, setModalType] = useState("");
+	const [product, setProduct] = useState(null);
+
+	const fetchData = async () => {		
+		try {
+			setProduct(productData)
+			
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchData()
+	}, []);
 
 	const openModal = (type) => {
     setModalType(type);
@@ -34,7 +48,7 @@ function App() {
 					<a href="/" className="link link--active">Unisex SportStyle Shoes</a>
 				</nav>
 
-				{product.title &&
+				{product?.title &&
 					<ProductCard
 						product={product}
 						openModal={() => openModal("PRODUCT_SIZE")}
