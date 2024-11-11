@@ -34,10 +34,12 @@ function App() {
 					<a href="/" className="link link--active">Unisex SportStyle Shoes</a>
 				</nav>
 
-				<ProductCard
-					product={product}
-					openModal={() => openModal("PRODUCT_SIZE")}
-				/>
+				{product.title &&
+					<ProductCard
+						product={product}
+						openModal={() => openModal("PRODUCT_SIZE")}
+					/>}
+				
 
 				<ModalProvider isOpen={isModalOpen} onClose={closeModal}>
 					{modalType === "PRODUCT_SIZE" && <ShoesGuideSizeModal />}
