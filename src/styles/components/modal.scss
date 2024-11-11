@@ -20,6 +20,12 @@
   max-width: 50vw;
   width: 100%;
   position: relative;
+
+	@media (max-width: 800px) {
+		max-width: 90dvw;
+		max-height: 90dvh;
+		overflow: scroll;
+	}
 }
 
 .modal-close {
@@ -73,6 +79,14 @@
 		gap: 24px;
 		font-size: 14px;
 		font-weight: 400;
+
+		@media (max-width: 800px) {
+			flex-direction: column-reverse;
+
+			.shoes-size-modal__image {
+				align-self: center;
+			}
+		}
 	}
 
 	&__image {
